@@ -17,5 +17,5 @@ export const EVENT_CONFIG = {
 
   // Backend URL.
   // During local development:
-  apiUrl: "http://localhost:5000"
+  apiUrl: "https://tasl-leadership-event-api.onrender.com"
 };
