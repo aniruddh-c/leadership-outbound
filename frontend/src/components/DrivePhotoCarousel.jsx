@@ -3,7 +3,7 @@ import { EVENT_CONFIG } from "../config";
 
 function DrivePhotoCarousel({
   endpoint,
-  placeholderText
+  placeholderText,
 }) {
   const [photos, setPhotos] = useState([]);
   const [selectedPhoto, setSelectedPhoto] = useState(null);
@@ -16,14 +16,14 @@ function DrivePhotoCarousel({
       );
 
       if (!response.ok) {
-        throw new Error("Unable to fetch photos");
+        throw new Error("Unable to fetch photographs");
       }
 
       const data = await response.json();
 
       setPhotos(data);
     } catch (error) {
-      console.error(error);
+      console.error("Photo loading error:", error);
     } finally {
       setLoading(false);
     }
@@ -32,64 +32,68 @@ function DrivePhotoCarousel({
   useEffect(() => {
     fetchPhotos();
 
-    // Check for newly uploaded photographs every minute.
-    const interval = setInterval(
-      fetchPhotos,
-      60000
-    );
+    const interval = setInterval(fetchPhotos, 60000);
 
     return () => clearInterval(interval);
   }, [endpoint]);
 
+  if (loading) {
+    return (
+      <div className="gallery-placeholder">
+        {placeholderText}
+      </div>
+    );
+  }
+
+  if (photos.length === 0) {
+    return (
+      <div className="gallery-placeholder">
+        {placeholderText}
+      </div>
+    );
+  }
+
+  /*
+   * Duplicate the photographs so the second set follows
+   * immediately after the first set. This creates the
+   * seamless looping effect.
+   */
+  const tickerPhotos = [...photos, ...photos];
+
   return (
     <>
-      {loading ? (
-        <div className="gallery-placeholder">
-          {placeholderText}
-        </div>
-      ) : photos.length === 0 ? (
-        <div className="gallery-placeholder">
-          {placeholderText}
-        </div>
-      ) : (
-        <div className="photo-track">
-          {photos.map((photo) => (
+      <div className="photo-ticker">
+        <div className="photo-ticker-track">
+          {tickerPhotos.map((photo, index) => (
             <button
               className="photo-card"
-              key={photo.id}
-              onClick={() =>
-                setSelectedPhoto(photo)
-              }
-              aria-label={`View ${photo.name}`}
+              key={`${photo.id}-${index}`}
+              onClick={() => setSelectedPhoto(photo)}
             >
               <img
-                src={`${EVENT_CONFIG.apiUrl}/photos/${photo.id}`}
+                src={`${EVENT_CONFIG.apiUrl}/api/photos/${photo.id}`}
                 alt=""
                 loading="lazy"
               />
             </button>
           ))}
         </div>
-      )}
+      </div>
 
       {selectedPhoto && (
         <div
           className="lightbox"
-          onClick={() =>
-            setSelectedPhoto(null)
-          }
+          onClick={() => setSelectedPhoto(null)}
         >
           <button
             className="lightbox-close"
-            onClick={() =>
-              setSelectedPhoto(null)
-            }
+            onClick={() => setSelectedPhoto(null)}
           >
             ×
           </button>
 
           <img
-            src={`${EVENT_CONFIG.apiUrl}/photos/${selectedPhoto.id}`}
+            src={`${EVENT_CONFIG.apiUrl}/api/photos/${selectedPhoto.id}`}
             alt=""
           />
         </div>

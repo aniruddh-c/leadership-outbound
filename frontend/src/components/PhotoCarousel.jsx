@@ -7,7 +7,7 @@ function PhotoCarousel() {
       id="event-gallery"
     >
       <div className="section-heading">
-        <span></span>
+        <span>01</span>
 
         <div>
           <div className="section-kicker">
@@ -20,7 +20,7 @@ function PhotoCarousel() {
 
       <DrivePhotoCarousel
         endpoint="api/photos"
-        placeholderText="Photographs from the event will appear here."
+        placeholderText="Photographs from the summit will appear here."
       />
     </section>
   );

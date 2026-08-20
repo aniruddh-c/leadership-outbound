@@ -2,10 +2,12 @@ import DrivePhotoCarousel from "./DrivePhotoCarousel";
 
 function SubmissionCarousel() {
   return (
-    <section className="gallery-section submission-gallery">
-
+    <section
+      className="gallery-section submission-gallery"
+      id="your-moments"
+    >
       <div className="section-heading">
-        <span></span>
+        <span>02</span>
 
         <div>
           <div className="section-kicker">
@@ -18,9 +20,8 @@ function SubmissionCarousel() {
 
       <DrivePhotoCarousel
         endpoint="api/submissions"
-        placeholderText="Photographs shared by you will appear here."
+        placeholderText="Photographs shared by our people will appear here."
       />
-
     </section>
   );
 }

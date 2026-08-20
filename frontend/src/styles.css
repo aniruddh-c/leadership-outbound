@@ -397,22 +397,83 @@ button {
   letter-spacing: -2px;
 }
 
-.photo-track {
+.photo-ticker {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.photo-ticker-track {
   display: flex;
   gap: 18px;
+  width: max-content;
 
-  overflow-x: auto;
+  animation: photoTicker 35s linear infinite;
+}
 
-  padding-bottom: 15px;
+.photo-card {
+  flex: 0 0 320px;
+  width: 320px;
+  height: 220px;
 
-  scrollbar-width: none;
+  display: block;
+  padding: 0;
+  margin: 0;
+
+  border: none;
+  border-radius: 4px;
+  overflow: hidden;
+
+  background: none;
+  cursor: pointer;
+}
+
+.photo-card img {
+  display: block;
+
+  width: 100%;
+  height: 100%;
+
+  /*
+   * Ignore the original image dimensions.
+   * Every photograph gets the same 320 × 220 frame.
+   */
+  object-fit: cover;
+  object-position: center;
+}
+
+.photo-card:hover img {
+  transform: scale(1.04);
+}
+
+@keyframes photoTicker {
+  from {
+    transform: translateX(0);
+  }
+
+  to {
+    transform: translateX(calc(-50% - 9px));
+  }
+}
+
+@media (max-width: 768px) {
+  .photo-ticker-track {
+    gap: 12px;
+    animation-duration: 30s;
+  }
+
+  .photo-card {
+    flex: 0 0 260px;
+    width: 260px;
+    height: 180px;
+  }
 }
 
 .photo-track::-webkit-scrollbar {
   display: none;
 }
 
-.photo-card {
+/* .photo-card {
   flex: 0 0 calc(25% - 14px);
 
   aspect-ratio: 4 / 3;
@@ -425,9 +486,9 @@ button {
   background: #ddd;
 
   cursor: pointer;
-}
+} */
 
-.photo-card img {
+/* .photo-card img {
   width: 100%;
   height: 100%;
 
@@ -441,7 +502,7 @@ button {
 .photo-card:hover img {
   transform: scale(1.04);
   filter: brightness(0.85);
-}
+} */
 
 /* PRE-EVENT GALLERY PLACEHOLDER */
 
