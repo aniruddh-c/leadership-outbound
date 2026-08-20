@@ -34,6 +34,13 @@ body {
   color: var(--black);
 }
 
+html,
+body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
+}
+
 button {
   font-family: inherit;
 }
@@ -210,8 +217,22 @@ button {
 
 .hero-title span {
   display: block;
+}
 
-  white-space: nowrap;
+@media (max-width: 768px) {
+
+  .hero-title {
+    font-size: clamp(40px, 10.5vw, 60px);
+    line-height: 0.98;
+    letter-spacing: -0.04em;
+    width: 100%;
+  }
+
+  .hero-title span {
+    display: block;
+    white-space: nowrap;
+  }
+
 }
 
 .hero-eyebrow {
@@ -273,6 +294,42 @@ button {
 
   box-shadow:
     0 15px 40px rgba(0, 0, 0, 0.2);
+}
+
+@media (max-width: 768px) {
+
+  .countdown {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    padding: 18px 10px;
+    margin-top: 28px;
+  }
+
+}
+
+@media (max-width: 768px) {
+
+  .countdown-item {
+    min-width: 0;
+    width: 100%;
+    text-align: center;
+    padding: 0 4px;
+    box-sizing: border-box;
+  }
+
+  .countdown-value {
+    font-size: clamp(28px, 8vw, 42px);
+    line-height: 1;
+  }
+
+  .countdown-label {
+    font-size: 9px;
+    letter-spacing: 0.18em;
+  }
+
 }
 
 .countdown-unit {
@@ -412,9 +469,9 @@ button {
 }
 
 .photo-card {
-  flex: 0 0 320px;
-  width: 320px;
-  height: 220px;
+  flex: 0 0 420px;
+  width: 420px;
+  height: 260px;
 
   display: block;
   padding: 0;
@@ -429,17 +486,10 @@ button {
 }
 
 .photo-card img {
-  display: block;
-
   width: 100%;
   height: 100%;
-
-  /*
-   * Ignore the original image dimensions.
-   * Every photograph gets the same 320 × 220 frame.
-   */
+  display: block;
   object-fit: cover;
-  object-position: center;
 }
 
 .photo-card:hover img {
@@ -457,16 +507,38 @@ button {
 }
 
 @media (max-width: 768px) {
+
+  .photo-track {
+    gap: 12px;
+    padding-bottom: 10px;
+  }
+
+  .photo-card {
+    flex: 0 0 calc(100vw - 48px);
+    width: calc(100vw - 48px);
+    height: 210px;
+  }
+
+  .photo-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+}
+
+@media (max-width: 768px) {
   .photo-ticker-track {
     gap: 12px;
     animation-duration: 30s;
   }
 
-  .photo-card {
+  /* .photo-card {
     flex: 0 0 260px;
     width: 260px;
     height: 180px;
-  }
+  } */
 }
 
 .photo-track::-webkit-scrollbar {
@@ -860,9 +932,9 @@ button {
     font-size: 30px;
   }
 
-  .countdown-label {
+  /* .countdown-label {
     font-size: 8px;
-  }
+  } */
 
   .gallery-section {
     padding: 90px 6vw;

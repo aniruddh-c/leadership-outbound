@@ -15,7 +15,6 @@ export const EVENT_CONFIG = {
   // Your Google Form link
   googleFormUrl: "https://forms.google.com/YOUR_FORM_ID",
 
-  // Backend URL.
-  // During local development:
+  // Backend URL
   apiUrl: "https://tasl-leadership-event-api.onrender.com"
 };
