@@ -3,7 +3,7 @@ function Header() {
     <header className="site-header">
       <div className="header-inner">
         <img
-          src="D:\TASL\Leadership Website\frontend\public\tasl-logo.png"
+          src={`${import.meta.env.BASE_URL}tasl-logo.png`}
           alt="Tata Advanced Systems"
           className="tasl-logo"
         />
