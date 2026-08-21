@@ -1,7 +1,19 @@
+import { useState } from "react";
 import { EVENT_CONFIG } from "../config";
 
 function ShareMoments() {
-  function openGoogleForm() {
+  const [showPopup, setShowPopup] = useState(false);
+
+  function handleOpenPopup() {
+    setShowPopup(true);
+  }
+
+  function handleClosePopup() {
+    setShowPopup(false);
+  }
+
+  function handleAgree() {
+    setShowPopup(false);
     window.open(
       EVENT_CONFIG.googleFormUrl,
       "_blank",
@@ -34,13 +46,33 @@ function ShareMoments() {
 
         <button
           className="primary-button"
-          onClick={openGoogleForm}
+          onClick={handleOpenPopup}
         >
           Share Your Moments
           <span>↗</span>
         </button>
 
       </div>
+
+      {showPopup && (
+        <div className="modal-backdrop" onClick={handleClosePopup}>
+          <div className="modal-box" onClick={(e) => e.stopPropagation()}>
+            <div className="section-kicker">NOTICE</div>
+            <h3>Company Data Policy</h3>
+            <p>
+              Please note that no company data or confidential material can be uploaded.
+            </p>
+            <div className="modal-actions">
+              <button className="modal-button deny" onClick={handleClosePopup}>
+                Deny
+              </button>
+              <button className="modal-button agree" onClick={handleAgree}>
+                Agree
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </section>
   );
 }
